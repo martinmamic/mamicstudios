@@ -314,7 +314,7 @@ const ReferenzenSection = () => {
       audioRefs.current[playingIndex].pause();
       // audioRefs.current[playingIndex].currentTime = 0; // Optionally reset time of other track
     }
-    
+
     const currentItem = referenzenData[activeTab]?.[index];
     if (!currentItem || !audioRefs.current[index]) return;
 
@@ -324,11 +324,11 @@ const ReferenzenSection = () => {
     }
     audioRefs.current[index].volume = volumes[index] !== undefined ? volumes[index] : 0.7;
 
-
-    // Ensure the correct src is set (especially for DELIVERED card, which is reactive via its <audio> tag's src)
-    // Reset currentTime to 0 before playing a new track or restarting
-    audioRefs.current[index].currentTime = 0;
-    setProgress(0); // Visually reset progress bar
+    // Nur auf Anfang setzen, wenn das Audio am Ende ist
+    if (audioRefs.current[index].ended || audioRefs.current[index].currentTime === audioRefs.current[index].duration) {
+      audioRefs.current[index].currentTime = 0;
+      setProgress(0);
+    }
 
     setPlayingIndex(index); // Set this card as the currently playing one
 
@@ -339,11 +339,10 @@ const ReferenzenSection = () => {
     if (audioRefs.current[index]) {
       audioRefs.current[index].pause();
     }
-    // Only nullify playingIndex if the paused card is the one that was marked as playing
     if (playingIndex === index) {
-        setPlayingIndex(null);
+      setPlayingIndex(null);
     }
-    // Progress remains at current pause point
+    // Progress bleibt auf aktueller Position
   };
 
   const handleTimelineChange = (e, index) => {
@@ -489,17 +488,17 @@ const ReferenzenSection = () => {
                         </button>
                         <div className="flex items-center w-full px-4 mb-2 mx-auto justify-center">
                           <span className="text-xs text-neutral-200 w-12 text-center select-none">
-                            {/* Display progress only if this card is playing */}
-                            {playingIndex === index && audioRefs.current[index] ? formatTime(progress) : '0:00'}
+                            {/* Zeige immer den aktuellen Fortschritt, nicht nur wenn playingIndex === index */}
+                            {audioRefs.current[index] ? formatTime(audioRefs.current[index].currentTime) : '0:00'}
                           </span>
                           <input
                             type="range"
                             min="0"
-                            max={audioRefs.current[index]?.duration || 0} // Use 0 if duration is not available
-                            value={playingIndex === index ? progress : 0}
+                            max={audioRefs.current[index]?.duration || 0}
+                            value={audioRefs.current[index]?.currentTime || 0}
                             onChange={(e) => handleTimelineChange(e, index)}
                             className="w-full h-1.5 bg-neutral-600 rounded-lg appearance-none cursor-pointer mx-2 accent-red-500"
-                            disabled={!(audioRefs.current[index]?.duration > 0) || playingIndex !== index} // Disable if no duration or not playing
+                            disabled={!(audioRefs.current[index]?.duration > 0)}
                           />
                           <span className="text-xs text-neutral-200 w-12 text-center select-none">
                             {audioRefs.current[index]?.duration ? formatTime(audioRefs.current[index].duration) : '0:00'}
@@ -872,7 +871,7 @@ const KontaktSection = ({ selectedService, setSelectedService, videoFade }) => {
   return (
     <section
       id="kontakt"
-      className="relative min-h-screen text-white flex flex-col justify-center items-center py-20 sm:py-28 overflow-hidden"
+      className="relative min-h-screen text-white flex flex-col justify-center items-center py-20 sm:py-28 overflow-hidden w-full px-4 box-border"
       style={{ background: 'transparent' }}
     >
       {/* Cleanes graues Overlay mit sanftem Gradient für den Übergang */}
@@ -884,10 +883,10 @@ const KontaktSection = ({ selectedService, setSelectedService, videoFade }) => {
           transition: 'opacity 0.4s cubic-bezier(.6,1.5,.5,1)',
         }}
       />
-      <div className="relative z-30 w-full max-w-md sm:max-w-2xl mx-auto text-center">
+      <div className="relative z-30 w-full max-w-md sm:max-w-2xl mx-auto text-center px-0">
         <h2 className="text-4xl md:text-5xl font-bold text-red-500 mb-4 drop-shadow-lg">Kontakt</h2>
         <p className="text-neutral-300 text-lg md:text-xl mb-10 sm:mb-12 drop-shadow">Schreib mir eine Nachricht!</p>
-        <form onSubmit={handleSubmit} className="space-y-6 text-left bg-black/50 rounded-2xl p-8 shadow-2xl backdrop-blur-md border border-white/10">
+        <form onSubmit={handleSubmit} className="space-y-6 text-left bg-black/50 rounded-2xl p-6 sm:p-8 shadow-2xl backdrop-blur-md border border-white/10 w-full box-border" style={{maxWidth:'100%'}}>
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-neutral-300 mb-1">Name</label>
             <input type="text" name="name" id="name" value={name} onChange={(e) => setName(e.target.value)} className="bg-neutral-800 border-neutral-700 text-neutral-100 text-sm rounded-lg focus:ring-1 focus:ring-red-500 focus:border-red-500 focus:outline-none block w-full p-3 placeholder-neutral-500" placeholder="Dein Name" required /> {/* Added focus:outline-none */}
