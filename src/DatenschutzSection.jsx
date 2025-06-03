@@ -4,7 +4,20 @@ const DatenschutzSection = () => (
 
 <section id="datenschutz" className="relative min-h-screen text-white flex flex-col justify-center items-center py-20 sm:py-28 px-0" style={{ background: '#18181b' }}>
     <div className="relative z-10 w-full max-w-md md:max-w-2xl lg:max-w-3xl mx-auto text-left bg-black/50 rounded-2xl p-8 sm:p-12 shadow-2xl backdrop-blur-md border border-white/10 w-full">
-      <h2 className="text-2xl sm:text-4xl font-bold text-red-500 mb-8 text-center break-words hyphens-auto">Datenschutzerklärung</h2>
+      <style>{`
+        @media (max-width: 500px) and (orientation: landscape) {
+          .datenschutz-title {
+            font-size: 0.55rem !important;
+            font-weight: 700 !important;
+            letter-spacing: -0.01em !important;
+            line-height: 1.05 !important;
+            margin-bottom: 1.5rem !important;
+          }
+        }
+      `}</style>
+      <h2 className="datenschutz-title text-2xl sm:text-4xl font-bold text-red-500 mb-8 text-center break-words hyphens-auto">
+        Datenschutzerklärung
+      </h2>
       <div className="space-y-6 text-neutral-300 text-sm md:text-base">
         <h3 className="text-xl font-semibold text-neutral-100 mb-2">1. Allgemeine Hinweise</h3>
         <p>Der Schutz deiner persönlichen Daten ist mir ein besonderes Anliegen. Ich behandle deine personenbezogenen Daten vertraulich und entsprechend der gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung.</p>

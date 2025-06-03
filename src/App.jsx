@@ -321,6 +321,42 @@ const EquipmentSection = () => {
             font-weight: 500 !important;
           }
         }
+        /* Landscape-Optimierung für iPhone/iPad */
+        @media (max-width: 1023px) and (orientation: landscape) {
+          .referenzen-ipadpro-grid {
+            grid-template-columns: 1fr 1fr !important;
+            grid-template-rows: 1fr 1fr !important;
+            gap: 1.2rem !important;
+            max-width: 95vw !important;
+          }
+          .aspect-square {
+            min-height: 180px !important;
+            height: 180px !important;
+            max-height: 220px !important;
+          }
+        }
+        /* NEU: Kleine Geräte (z.B. iPhone SE) Landscape: min-height und Grid-Höhe/Kartenhöhe reduzieren */
+        @media (max-width: 767px) and (orientation: landscape) {
+          #equipment, #referenzen {
+            min-height: unset !important;
+            padding-top: 2.5rem !important;
+            padding-bottom: 2.5rem !important;
+          }
+          .equipment-tablet-grid {
+            min-height: unset !important;
+            height: auto !important;
+          }
+          .equipment-tablet-card {
+            min-height: 260px !important;
+            height: auto !important;
+            padding-bottom: 0.2rem !important;
+          }
+          .equipment-tablet-img {
+            height: 110px !important;
+            min-height: 110px !important;
+            max-height: 110px !important;
+          }
+        }
       `}</style>
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
         <h2 className="text-4xl md:text-5xl font-bold mb-10 text-center">Equipment</h2>
@@ -412,11 +448,16 @@ const ReferenzenSection = () => {
     const currentItem = referenzenData[activeTab]?.[index];
     if (!currentItem || !audioRefs.current[index]) return;
 
-    // Set initial volume if not already set
-    if (volumes[index] === undefined) {
-      setVolumes(prevVolumes => ({ ...prevVolumes, [index]: 0.7 })); // Default volume 0.7
-    }
-    audioRefs.current[index].volume = volumes[index] !== undefined ? volumes[index] : 0.7;
+    // Set initial volume if not already set (immer auf 0.7 beim Songwechsel, außer es ist schon gesetzt)
+    setVolumes(prevVolumes => {
+      if (prevVolumes[index] === undefined) {
+        if (audioRefs.current[index]) audioRefs.current[index].volume = 0.7;
+        return { ...prevVolumes, [index]: 0.7 };
+      } else {
+        if (audioRefs.current[index]) audioRefs.current[index].volume = prevVolumes[index];
+        return prevVolumes;
+      }
+    });
 
     // Nur auf Anfang setzen, wenn das Audio am Ende ist
     if (audioRefs.current[index].ended || audioRefs.current[index].currentTime === audioRefs.current[index].duration) {
@@ -468,6 +509,7 @@ const ReferenzenSection = () => {
       if (audio) audio.currentTime = 0;
     });
     setSelectedDeliveredSongIndex(0); // Reset selected song for DELIVERED card
+    setVolumes({}); // Volume-Fader zurücksetzen
   }, [activeTab]);
 
   const TabButton = ({ label }) => (
@@ -634,7 +676,8 @@ const ReferenzenSection = () => {
                           {audioRefs.current[index]?.duration ? formatTime(audioRefs.current[index].duration) : '0:00'}
                         </span>
                       </div>
-                      <div className="flex items-center w-full px-4 mt-2 mx-auto justify-center hidden sm:flex">
+                      {/* Volume-Fader nur auf Desktop anzeigen (ab 1280px, also .xl) */}
+                      <div className="flex items-center w-full px-4 mt-2 mx-auto justify-center hidden xl:flex">
                         <span className="w-12 flex justify-center">
                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 text-neutral-300">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M19.114 5.636a9 9 0 0 1 0 12.728M16.463 8.288a5.25 5.25 0 0 1 0 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z" />
@@ -1225,7 +1268,7 @@ const Footer = () => {
         display: flex !important;
         flex-direction: column !important;
         align-items: center !important;
-        gap: 1.5rem !important;
+               gap: 1.5rem !important;
       }
       .footer-tablet-socials {
         justify-content: center !important;
