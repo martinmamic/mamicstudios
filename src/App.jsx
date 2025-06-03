@@ -61,11 +61,9 @@ const HomeAboutSection = () => (
     <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> {/* Changed max-w-5xl to max-w-7xl */}
       {/* Hero Text */}
       <div className="mb-12 lg:mb-16">
-        <h1 className="text-4xl md:text-5xl font-bold">Ich bin Martin Mamic</h1>
-        <p className="mt-4 px-6 py-2 bg-red-600 rounded-full inline-block text-white font-semibold text-base md:text-lg">
-          Audio Engineer & Beatmaker
-        </p>
-        <div className="mt-8 flex flex-row justify-center items-center gap-x-2 sm:gap-x-6 text-sm md:text-base max-w-xs mx-auto">
+        <h1 className="text-4xl md:text-5xl font-bold mb-6">Ich bin Martin Mamic</h1>
+        <p className="px-6 py-2 bg-red-600 rounded-full inline-block text-white font-semibold text-base md:text-lg mb-6">Audio Engineer & Beatmaker</p>
+        <div className="flex flex-row justify-center items-center gap-x-2 sm:gap-x-6 text-sm md:text-base max-w-xs mx-auto">
           <span className="border-b-2 border-red-500 pb-1 whitespace-nowrap">Klarer Sound.</span>
           <span className="border-b-2 border-red-500 pb-1 whitespace-nowrap">Echte Emotion.</span>
           <span className="border-b-2 border-red-500 pb-1 whitespace-nowrap">Bleibende Produktionen.</span>
@@ -77,7 +75,7 @@ const HomeAboutSection = () => (
         {/* Left: Bild */}
         <div className="flex-shrink-0 flex justify-center md:justify-start w-full max-w-md sm:w-3/4 md:w-2/5 mx-auto md:mx-0"> {/* Increased md:w-2/5, added max-w-md for mobile */}
           <img
-            src="/Ich.webp"
+            src="/martinmamicich.webp"
             alt="Martin Mamic"
             className="w-full h-full rounded-3xl object-cover shadow-xl border-2 border-neutral-700" /* Changed rounded-2xl to rounded-3xl */
           />
@@ -167,14 +165,14 @@ const EquipmentSection = () => {
       },
       {
         name: 'Slate Digital',
-        description: 'Virtual Mix Rack + All Access Pass = komplette Mixing-Chain.\\nKompressoren, EQs & Co. in einem Plugin – flexibel kombinierbar und perfekt integriert.',
+        description: 'Virtual Mix Rack + All Access Pass = komplette Mixing-Chain, Kompressoren, EQs & Co. in einem Plugin – flexibel kombinierbar und perfekt integriert.',
         tags: ['All Access', 'VMR', 'SSL'], // Changed tags
         image: '/Slate.webp',
         category: 'Slate' // Changed from 'Dynamik'
       },
       {
         name: 'Izotope Suite', // Changed from 'Beyerdynamic DT 770 Pro'
-        description: 'Vereint leistungsstarke Tools für Mixing, Mastering und Klanganalyse in einer Lösung.\\nPerfekt für effiziente und professionelle Studioarbeit.', // Changed 'vereint' to 'Vereint'
+        description: 'Vereint leistungsstarke Tools für Mixing, Mastering und Klanganalyse in einer Lösung. Perfekt für effiziente und professionelle Studioarbeit.', // Changed 'vereint' to 'Vereint'
         tags: ['Ozone', 'Neutron', 'AI Tools'],
         image: '/equipement-balken.webp', // Changed to equipement-balken.jpg
         category: 'Native Instruments' // Changed from 'Kopfhörer'
@@ -226,19 +224,115 @@ const EquipmentSection = () => {
   }, []);
 
   return (
-    <section id="equipment" className="min-h-screen bg-transparent text-white flex flex-col justify-center items-center py-28"> {/* Changed bg-neutral-950 to bg-transparent */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center"> {/* Changed max-w-5xl to max-w-7xl */}
+    <section id="equipment" className="min-h-screen bg-transparent text-white flex flex-col justify-center items-center py-28">
+      <style>{`
+        @media (min-width: 640px) and (max-width: 1366px) {
+          .equipment-tablet-tabs {
+            min-height: 48px !important;
+            display: flex;
+            align-items: flex-end;
+            margin-bottom: 3rem !important;
+          }
+          .equipment-tablet-grid {
+            align-items: stretch !important;
+            min-height: 600px !important;
+            height: 600px !important;
+            display: grid !important;
+          }
+          .equipment-tablet-card {
+            height: 100% !important;
+            min-height: 450px !important; /* Changed from 480px to 450px */
+            display: flex !important;
+            flex-direction: column !important;
+          }
+          .equipment-tablet-img {
+            height: 200px !important; /* Changed from 224px to 200px */
+            min-height: 200px !important; /* Changed from 224px to 200px */
+            max-height: 200px !important; /* Changed from 224px to 200px */
+          }
+          .equipment-tablet-tag {
+            font-size: 0.62rem !important;
+            padding: 0.13rem 0.7rem !important;
+            min-width: 0 !important;
+            line-height: 1.1 !important;
+            margin-bottom: 0.22rem !important;
+          }
+          .equipment-tablet-tags-row {
+            width: 100%;
+            display: flex;
+            flex-direction: column !important;
+            flex-wrap: nowrap !important;
+            gap: 0.1rem !important;
+            justify-content: flex-start;
+            align-items: flex-start;
+            margin-top: auto;
+            padding-top: 0.5rem;
+          }
+        }
+        /* iPad Mini (768px - 1023px) und iPad Air (820px - 1180px) optimiert */
+        @media (min-width: 640px) and (max-width: 1023px) {
+          .equipment-tablet-card {
+            min-height: 450px !important; /* Changed from 480px to 450px */
+            padding-bottom: 0.5rem !important;
+          }
+          .equipment-tablet-img {
+            height: 200px !important; /* Changed from 224px to 200px */
+            min-height: 200px !important; /* Changed from 224px to 200px */
+            max-height: 200px !important; /* Changed from 224px to 200px */
+          }
+          .equipment-tablet-content {
+            padding: 1.1rem 1rem 0.5rem 1rem !important;
+          }
+          .equipment-tablet-title {
+            font-size: 1.08rem !important;
+            margin-bottom: 0.35rem !important;
+          }
+          .equipment-tablet-desc {
+            font-size: 0.93rem !important;
+            margin-bottom: 0.5rem !important;
+            line-height: 1.38 !important;
+            color: #e5e7eb !important;
+            font-weight: 500 !important;
+          }
+        }
+        /* iPad Air (1180px) und Pro (1366px) */
+        @media (min-width: 1024px) and (max-width: 1366px) {
+          .equipment-tablet-card {
+            min-height: 440px !important;
+            padding-bottom: 0.7rem !important;
+          }
+          .equipment-tablet-img {
+            height: 210px !important;
+            min-height: 210px !important;
+            max-height: 210px !important;
+          }
+          .equipment-tablet-content {
+            padding: 1.2rem 1.1rem 0.7rem 1.1rem !important;
+          }
+          .equipment-tablet-title {
+            font-size: 1.13rem !important;
+            margin-bottom: 0.45rem !important;
+          }
+          .equipment-tablet-desc {
+            font-size: 0.97rem !important;
+            margin-bottom: 0.6rem !important;
+            line-height: 1.42 !important;
+            color: #e5e7eb !important;
+            font-weight: 500 !important;
+          }
+        }
+      `}</style>
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
         <h2 className="text-4xl md:text-5xl font-bold mb-10 text-center">Equipment</h2>
-        <div className="flex space-x-3 sm:space-x-4 mb-12">
+        <div className="flex space-x-3 sm:space-x-4 mb-12 equipment-tablet-tabs">
           <TabButton label="Recording" />
           <TabButton label="Mixing" />
           <TabButton label="Monitoring" />
         </div>
-
-        <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-10 w-full max-w-3xl lg:max-w-7xl mx-auto">
+        <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-10 w-full max-w-3xl lg:max-w-7xl mx-auto equipment-tablet-grid">
           {equipmentData[activeTab].map((item) => (
-            <div key={item.name} className="bg-neutral-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col transition-transform duration-300 sm:hover:scale-105 min-h-[480px] w-full max-w-md mx-auto border border-neutral-700/70 sm:hover:border-red-500/80 hover:shadow-[0_0_25px_-5px_rgba(239,68,68,0.7)] hover:border-red-500/80 active:shadow-[0_0_25px_-5px_rgba(239,68,68,0.7)] active:border-red-500/80"> {/* Zurück zu vertikalem Layout, 3 Karten pro Reihe auf lg screens */}
-              <div className="relative w-full h-56 flex-shrink-0"> {/* Bild oben */}
+            <div key={item.name} className="bg-neutral-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col transition-transform duration-300 sm:hover:scale-105 min-h-[450px] w-full max-w-md mx-auto border border-neutral-700/70 sm:hover:border-red-500/80 hover:shadow-[0_0_25px_-5px_rgba(239,68,68,0.7)] hover:border-red-500/80 active:shadow-[0_0_25px_-5px_rgba(239,68,68,0.7)] active:border-red-500/80 equipment-tablet-card">
+              <div className="relative w-full h-56 flex-shrink-0 equipment-tablet-img">
                 <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                 {item.category && (
                   <span className="absolute top-4 right-4 bg-red-500 text-white text-sm font-semibold px-3 py-1.5 rounded-lg shadow-lg">
@@ -246,14 +340,14 @@ const EquipmentSection = () => {
                   </span>
                 )}
               </div>
-              <div className="p-7 flex flex-col flex-grow justify-between">
+              <div className="p-7 flex flex-col flex-grow justify-between equipment-tablet-content">
                 <div>
-                  <h3 className="text-2xl font-bold mb-3 text-neutral-100">{item.name}</h3>
-                  <p className="text-neutral-300 text-sm mb-5 flex-grow leading-relaxed font-medium">{item.description}</p>
+                  <h3 className="text-2xl font-bold mb-3 text-neutral-100 equipment-tablet-title">{item.name}</h3>
+                  <p className="text-neutral-300 text-sm mb-5 flex-grow leading-relaxed font-medium equipment-tablet-desc">{item.description}</p>
                 </div>
-                <div className="flex flex-wrap gap-2 mt-auto pt-3">
+                <div className="flex flex-wrap gap-2 mt-auto pt-3 equipment-tablet-tags-row">
                   {item.tags.map(tag => (
-                    <span key={tag} className="bg-neutral-700 text-neutral-200 text-xs px-3 py-1 rounded-md font-semibold shadow">
+                    <span key={tag} className="bg-neutral-700 text-neutral-200 text-xs px-3 py-1 rounded-md font-semibold shadow equipment-tablet-tag">
                       {tag}
                     </span>
                   ))}
@@ -337,12 +431,8 @@ const ReferenzenSection = () => {
 
   const handlePause = (index) => {
     if (audioRefs.current[index]) {
-      // iOS Safari Workaround: force pause and reset src to force UI update, aber NICHT auf Anfang setzen
       audioRefs.current[index].pause();
-      // iOS: src neu setzen, um den Audio-Tag zu "resetten"
-      const src = audioRefs.current[index].src;
-      audioRefs.current[index].src = '';
-      audioRefs.current[index].src = src;
+      // Kein src-Reset mehr, damit der Song nicht auf Anfang springt
     }
     if (playingIndex === index) {
       setPlayingIndex(null);
@@ -394,6 +484,40 @@ const ReferenzenSection = () => {
 
   return (
     <section id="referenzen" className="min-h-screen bg-transparent text-white flex flex-col justify-center items-center py-28">
+      <style>{`
+  /* iPad Pro (1024px bis 1366px): Referenzen-Grid wie Tablet/Mobile (2x2 große Karten) */
+  @media (min-width: 1024px) and (max-width: 1366px) {
+    .referenzen-ipadpro-grid {
+      display: grid !important;
+      grid-template-columns: repeat(2, 1fr) !important;
+      grid-template-rows: repeat(2, 1fr) !important;
+      gap: 2.5rem !important;
+      max-width: 700px !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+  }
+  /* Mobile: delivered-song-btn kleiner und kompakter */
+  @media (max-width: 639px) {
+    .delivered-song-btn {
+      font-size: 0.62rem !important;
+      padding: 0.09rem 0.32rem !important;
+      min-width: 22px !important;
+      margin-right: 0.09rem !important;
+      margin-left: 0.09rem !important;
+      border-radius: 0.45rem !important;
+      letter-spacing: 0.01em !important;
+      height: 1.3rem !important;
+      line-height: 1.1 !important;
+      max-width: 70px !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+    }
+    .delivered-song-btn:last-child {
+      margin-right: 0 !important;
+    }
+  }
+`}</style>
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
         <h2 className="text-4xl md:text-5xl font-bold mb-3 text-center">Referenzen</h2>
         <p className="text-neutral-400 text-base md:text-lg mb-12 text-center">Meine Produktionen – Mixing, Mastering & Beats</p>
@@ -401,7 +525,7 @@ const ReferenzenSection = () => {
           <TabButton label="CHEEKY CHOKAAH" />
           <TabButton label="MIGO" />
         </div>
-        <div className="grid w-full max-w-md mx-auto sm:w-auto sm:max-w-none sm:mx-0 grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-5 sm:gap-6 lg:gap-8">
+        <div className="grid w-full max-w-md mx-auto sm:w-auto sm:max-w-none sm:mx-0 grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 lg:gap-8 referenzen-ipadpro-grid">
           {(referenzenData[activeTab] || []).map((item, index) => {
             const isDelivered = activeTab === 'MIGO' && item.alt === 'DELIVERED EP (3 Songs)';
             const deliveredSongs = [              { title: 'DELIVERED', file: '/audio/DELIVERED.mp3' },
@@ -427,8 +551,8 @@ const ReferenzenSection = () => {
                   <>
                     {isDelivered && (
                       <div
-                        className="flex space-x-1 mb-1 absolute left-1/2 z-20"
-                        style={{ top: '18%', transform: 'translateX(-50%)', width: 'auto', minWidth: '80%' }}
+                        className="absolute left-1/2 z-20 flex justify-center w-full"
+                        style={{ top: '18%', transform: 'translateX(-50%)' }}
                       >
                         {deliveredSongs.map((song, i) => (
                           <button
@@ -437,17 +561,16 @@ const ReferenzenSection = () => {
                               e.stopPropagation();
                               setSelectedDeliveredSongIndex(i); // Update selected song index
 
-                              // Manually update src and play if this card is active or becomes active
+                              // Stop playback and reset play state when switching song
                               if (audioRefs.current[index]) {
+                                audioRefs.current[index].pause();
                                 audioRefs.current[index].src = deliveredSongs[i].file;
                                 audioRefs.current[index].currentTime = 0;
                                 setProgress(0);
-                                
-                                // If this card was already playing, or becomes the one to play
-                                handlePlay(index);
                               }
+                              setPlayingIndex(null); // Ensure play button is shown
                             }}
-                            className={`px-2 py-0.5 rounded-md text-xs font-semibold transition-colors duration-200 ${selectedDeliveredSongIndex === i ? 'bg-red-500 text-white' : 'bg-neutral-700 text-neutral-200 hover:bg-red-400 hover:text-white'}`}
+                            className={`delivered-song-btn px-2 py-0.5 rounded-md text-xs font-semibold transition-colors duration-200 ${selectedDeliveredSongIndex === i ? 'bg-red-500 text-white' : 'bg-neutral-700 text-neutral-200 hover:bg-red-400 hover:text-white'}`}
                             style={{ fontSize: '0.8rem', minWidth: 44, whiteSpace: 'nowrap' }}
                           >
                             {song.title}
@@ -609,21 +732,32 @@ const PricingCard = ({ price, service, details, setSelectedService, handleSetSel
           80% { opacity: 1; filter: blur(0.5px); }
           100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
         }
-        /* Info-Icon auf iPad Pro (1024px bis 1366px) immer sichtbar und größer/runder */
+        /* Info-Icon auf iPad Pro (1024px bis 1366px) immer sichtbar, aber gleiche Größe wie auf anderen Tablets */
         @media (min-width: 1024px) and (max-width: 1366px) {
           .pricing-info-btn {
             opacity: 1 !important;
-            padding: 0.5rem !important;
-            width: 2.5rem !important;
-            height: 2.5rem !important;
-            border-radius: 9999px !important;
+            width: 36px !important;
+            height: 36px !important;
+            padding: 0 !important;
             display: flex;
             align-items: center;
             justify-content: center;
           }
-          .pricing-info-btn svg {
-            width: 1.5rem !important;
-            height: 1.5rem !important;
+          /* Schriftgröße der Preiskarten-Infos etwas kleiner */
+          .preise-tablet-card .flex.flex-col.justify-center.items-center.text-center,
+          .preise-tablet-card ul,
+          .preise-tablet-card li,
+          .preise-tablet-card button {
+            font-size: 1.01rem !important;
+          }
+        }
+        /* --- NEU: Mobile Schriftgröße für Preiskarten-Infos --- */
+        @media (max-width: 639px) {
+          .preise-tablet-card ul,
+          .preise-tablet-card li,
+          .preise-tablet-card button {
+            font-size: 0.97rem !important;
+            line-height: 1.45 !important;
           }
         }
       `}</style>
@@ -811,6 +945,15 @@ const PreiseSection = ({ setSelectedService, handleSetSelectedServiceAndScroll }
       font-size: 1.08rem !important;
       padding-top: 0.9rem !important;
       padding-bottom: 0.9rem !important;
+    }
+  }
+  /* --- NEU: Mobile Schriftgröße für Preiskarten-Infos --- */
+  @media (max-width: 639px) {
+    .preise-tablet-card ul,
+    .preise-tablet-card li,
+    .preise-tablet-card button {
+      font-size: 0.97rem !important;
+      line-height: 1.45 !important;
     }
   }
 `}</style>
@@ -1283,6 +1426,10 @@ const InfinityLoopIcon = ({ isHovered }) => (
      
 
 
+
+      @keyframes infinity-rotate-red { 0%{transform:rotate(0deg);} 100%{transform:rotate(360deg);} }
+      @keyframes infinity-rotate-white { 0%{transform:rotate(360deg);} 100%{transform:rotate(0deg);} }
+      @keyframes infinity-glow { 0%,100%{filter:drop-shadow(0 0 6px #fff8) drop-shadow(0 0 24px #ef4444cc);} 50%{filter:drop-shadow(0 0 24px #fff) drop-shadow(0 0 36px #ef4444);}
 
       @keyframes infinity-rotate-red { 0%{transform:rotate(0deg);} 100%{transform:rotate(360deg);} }
       @keyframes infinity-rotate-white { 0%{transform:rotate(360deg);} 100%{transform:rotate(0deg);} }
