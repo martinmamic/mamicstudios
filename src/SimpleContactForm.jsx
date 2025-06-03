@@ -10,7 +10,7 @@ export default function SimpleContactForm() {
   ) : (
     <form
       className="max-w-md mx-auto bg-neutral-900 p-8 rounded-xl shadow-lg space-y-6"
-      action="https://formsubmit.co/mamicstudios@gmail.com"
+      action="https://formsubmit.io/send/mamicstudios@gmail.com"
       method="POST"
       onSubmit={() => setSubmitted(true)}
     >
