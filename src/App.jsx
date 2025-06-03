@@ -337,12 +337,17 @@ const ReferenzenSection = () => {
 
   const handlePause = (index) => {
     if (audioRefs.current[index]) {
+      // iOS Safari Workaround: force pause and reset src to force UI update, aber NICHT auf Anfang setzen
       audioRefs.current[index].pause();
+      // iOS: src neu setzen, um den Audio-Tag zu "resetten"
+      const src = audioRefs.current[index].src;
+      audioRefs.current[index].src = '';
+      audioRefs.current[index].src = src;
     }
     if (playingIndex === index) {
       setPlayingIndex(null);
     }
-    // Progress bleibt auf aktueller Position
+    // setProgress(0); // Fortschritt NICHT zurücksetzen
   };
 
   const handleTimelineChange = (e, index) => {
@@ -1155,11 +1160,11 @@ const InfinityLoopIcon = ({ isHovered }) => (
     borderRadius: '50%',
     background: 'radial-gradient(circle at 60% 40%, #fff 0%, #ef4444 80%, #ef444422 100%)',
     boxShadow: isHovered
-      ? '0  0 32px 8px #ef4444cc, 0 0 0 12px #fff2'
+      ? '0 0 32px 8px #ef4444cc, 0 0 0 12px #fff2'
       : '0 0 16px 4px #ef4444aa',
     transition: 'box-shadow 0.3s ease-in-out', // Nur box-shadow animieren, Rest durch cardTextIn
     overflow: 'visible',
-    opacity: isHovered ? 1 : 0, // Zustand für Animation durch cardTextIn
+    opacity: isHovered ? 1 : 0,
     transform: isHovered ? 'scale(1)' : 'scale(0.7) translateY(20px)', // Zustand für Animation durch cardTextIn
     filter: isHovered ? 'blur(0)' : 'blur(8px)', // Zustand für Animation durch cardTextIn
     marginTop: '10px', // Icon minimal nach unten verschieben

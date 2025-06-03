@@ -3,7 +3,7 @@ import React from "react";
 const DatenschutzSection = () => (
 
 <section id="datenschutz" className="relative min-h-screen text-white flex flex-col justify-center items-center py-20 sm:py-28 px-4 sm:px-6 lg:px-8 w-full box-border">
-    <div className="relative z-10 w-full max-w-md md:max-w-2xl lg:max-w-3xl mx-auto text-left bg-black/50 rounded-2xl p-4 sm:p-8 shadow-2xl backdrop-blur-md border border-white/10 overflow-hidden break-words box-border">
+    <div className="relative z-10 w-full max-w-full sm:max-w-lg md:max-w-2xl lg:max-w-3xl mx-auto text-left bg-black/50 rounded-2xl p-4 sm:p-8 shadow-2xl backdrop-blur-md border border-white/10 overflow-hidden break-words box-border">
       <h2 className="text-3xl sm:text-4xl font-bold text-red-500 mb-8 text-center">Datenschutzerklärung</h2>
       <div className="space-y-6 text-neutral-300 text-sm md:text-base">
         <h3 className="text-xl font-semibold text-neutral-100 mb-2">1. Allgemeine Hinweise</h3>
