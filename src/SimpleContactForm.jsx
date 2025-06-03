@@ -18,7 +18,7 @@ export default function SimpleContactForm() {
       {/* Disable captcha by Formsubmit */}
       <input type="hidden" name="_captcha" value="false" />
       {/* Redirect to thank you message (optional) */}
-      {/* <input type="hidden" name="_next" value="https://yourdomain.com/danke.html" /> */}
+      <input type="hidden" name="_next" value="https://mamicstudios.de/danke.html" />
       <div>
         <label htmlFor="name" className="block text-sm font-medium text-neutral-300 mb-1">Name</label>
         <input
