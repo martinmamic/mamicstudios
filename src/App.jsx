@@ -65,10 +65,10 @@ const HomeAboutSection = () => (
         <p className="mt-4 px-6 py-2 bg-red-600 rounded-full inline-block text-white font-semibold text-base md:text-lg">
           Audio Engineer & Beatmaker
         </p>
-        <div className="mt-8 flex flex-wrap space-x-4 sm:space-x-6 justify-center text-sm md:text-base">
-          <span className="border-b-2 border-red-500 pb-1">Klarer Sound.</span>
-          <span className="border-b-2 border-red-500 pb-1">Echte Emotion.</span>
-          <span className="border-b-2 border-red-500 pb-1">Bleibende Produktionen.</span>
+        <div className="mt-8 flex flex-row justify-center items-center gap-x-2 sm:gap-x-6 text-sm md:text-base max-w-xs mx-auto">
+          <span className="border-b-2 border-red-500 pb-1 whitespace-nowrap">Klarer Sound.</span>
+          <span className="border-b-2 border-red-500 pb-1 whitespace-nowrap">Echte Emotion.</span>
+          <span className="border-b-2 border-red-500 pb-1 whitespace-nowrap">Bleibende Produktionen.</span>
         </div>
       </div>
 
@@ -235,9 +235,9 @@ const EquipmentSection = () => {
           <TabButton label="Monitoring" />
         </div>
 
-        <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-10 w-full max-w-3xl lg:max-w-7xl mx-auto">
           {equipmentData[activeTab].map((item) => (
-            <div key={item.name} className="bg-neutral-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col transition-transform duration-300 hover:scale-105 min-h-[480px] w-full max-w-md mx-auto border border-neutral-700/70 hover:border-red-500/80"> {/* Zurück zu vertikalem Layout, 3 Karten pro Reihe auf lg screens */}
+            <div key={item.name} className="bg-neutral-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col transition-transform duration-300 sm:hover:scale-105 min-h-[480px] w-full max-w-md mx-auto border border-neutral-700/70 sm:hover:border-red-500/80 hover:shadow-[0_0_25px_-5px_rgba(239,68,68,0.7)] hover:border-red-500/80 active:shadow-[0_0_25px_-5px_rgba(239,68,68,0.7)] active:border-red-500/80"> {/* Zurück zu vertikalem Layout, 3 Karten pro Reihe auf lg screens */}
               <div className="relative w-full h-56 flex-shrink-0"> {/* Bild oben */}
                 <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                 {item.category && (
@@ -609,10 +609,27 @@ const PricingCard = ({ price, service, details, setSelectedService, handleSetSel
           80% { opacity: 1; filter: blur(0.5px); }
           100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
         }
+        /* Info-Icon auf iPad Pro (1024px bis 1366px) immer sichtbar und größer/runder */
+        @media (min-width: 1024px) and (max-width: 1366px) {
+          .pricing-info-btn {
+            opacity: 1 !important;
+            padding: 0.5rem !important;
+            width: 2.5rem !important;
+            height: 2.5rem !important;
+            border-radius: 9999px !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+          .pricing-info-btn svg {
+            width: 1.5rem !important;
+            height: 1.5rem !important;
+          }
+        }
       `}</style>
       <div
         className={
-          `bg-neutral-800 p-8 rounded-xl shadow-[0_0_25px_-10px_rgba(239,68,68,0.2)] border border-neutral-700/30 flex flex-col justify-center items-center text-center min-h-[480px] transition-all duration-300 ease-in-out w-full max-w-md mx-auto` +
+          `group bg-neutral-800 p-8 rounded-xl shadow-[0_0_25px_-10px_rgba(239,68,68,0.2)] border border-neutral-700/30 flex flex-col justify-center items-center text-center min-h-[480px] transition-all duration-300 ease-in-out w-full max-w-md mx-auto` +
           (isHovered && !isMobile ? ' card-hovered hover:shadow-[0_0_35px_-10px_rgba(239,68,68,0.5)] hover:border-red-500/50 transform hover:-translate-y-1 will-change-transform will-change-opacity' : '')
         }
         onMouseEnter={() => {
@@ -623,9 +640,11 @@ const PricingCard = ({ price, service, details, setSelectedService, handleSetSel
         }}
         style={{ overflow: 'hidden', position: 'relative' }}
       >
-        {/* Info Icon: Mobile immer sichtbar, Desktop nur bei Hover */}
+        {/* Info Icon: Mobile & Tablet immer sichtbar, Desktop/Web nur bei Hover, iPad Pro immer sichtbar */}
         <button
-          className={`absolute top-4 right-4 p-1 bg-red-500 rounded-full shadow-lg transition-opacity duration-200 ${isMobile ? 'sm:hidden opacity-100' : 'hidden sm:block'} ${isHovered && !isMobile ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
+          className={
+            `pricing-info-btn absolute top-4 right-4 p-1 bg-red-500 rounded-full shadow-lg transition-opacity duration-200 opacity-100 lg:opacity-0 group-hover:opacity-100`
+          }
           aria-label="Details anzeigen"
           onClick={() => setIsMobileDetailsOpen((open) => !open)}
           style={{ zIndex: 10 }}
@@ -649,7 +668,7 @@ const PricingCard = ({ price, service, details, setSelectedService, handleSetSel
             <div>
               <ul className="space-y-2 text-base md:text-lg text-neutral-300 list-none p-0 mb-4 mt-4 transition-all duration-300" style={{ fontSize: '1.18rem' }}>
                 {details.map((detail, i) => (
-                  <li key={i} className="flex items-center"
+                  <li key={i} className="flex items-center whitespace-nowrap"
                     style={{animation: `cardListIn 0.5s cubic-bezier(.6,1.5,.5,1) both`, animationDelay: `${0.13 + i*0.07}s`}}>
                     <CheckmarkIcon isHovered={isHovered} delay={0.13 + i*0.07} />
                     <span className="ml-2">{detail}</span>
@@ -679,7 +698,7 @@ const PricingCard = ({ price, service, details, setSelectedService, handleSetSel
             <div>
               <ul className="space-y-2 text-base md:text-lg text-neutral-300 list-none p-0 mb-4 mt-4 transition-all duration-300" style={{ fontSize: '1.18rem' }}>
                 {details.map((detail, i) => (
-                  <li key={i} className="flex items-center"
+                  <li key={i} className="flex items-center whitespace-nowrap"
                     style={{animation: `cardListIn 0.5s cubic-bezier(.6,1.5,.5,1) both`, animationDelay: `${0.13 + i*0.07}s`}}>
                     <CheckmarkIcon isHovered={isHovered} delay={0.13 + i*0.07} />
                     <span className="ml-2">{detail}</span>
@@ -750,12 +769,60 @@ const PreiseSection = ({ setSelectedService, handleSetSelectedServiceAndScroll }
       id="preise"
       className="relative min-h-screen bg-transparent text-white flex flex-col justify-center items-center pt-16 sm:pt-20 pb-20 sm:pb-28 scroll-mt-16 sm:scroll-mt-20"
     >
-      {/* Removed internal background div. Content will be on transparent section. */}
-      <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center"> {/* Changed max-w-5xl to max-w-7xl */}
+      <style>{`
+  @media (min-width: 640px) and (max-width: 1023px) {
+    .preise-tablet-grid {
+      grid-template-columns: 1fr !important;
+      gap: 2rem !important;
+      max-width: 480px !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+    .preise-tablet-card {
+      min-width: 0 !important;
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+  }
+  @media (min-width: 1024px) and (max-width: 1366px) {
+    .preise-tablet-grid {
+      grid-template-columns: repeat(3, 1fr) !important;
+      gap: 2.5rem !important;
+      max-width: 1200px !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+    .preise-tablet-card {
+      min-width: 0 !important;
+      max-width: 380px !important;
+      width: 100% !important;
+      font-size: 1.13rem !important;
+    }
+    .preise-tablet-card .flex.flex-col.justify-center.items-center.text-center {
+      padding: 2.2rem 1.2rem !important;
+      font-size: 1.13rem !important;
+      line-height: 1.6 !important;
+    }
+    .preise-tablet-card ul {
+      font-size: 1.13rem !important;
+      line-height: 1.6 !important;
+    }
+    .preise-tablet-card button {
+      font-size: 1.08rem !important;
+      padding-top: 0.9rem !important;
+      padding-bottom: 0.9rem !important;
+    }
+  }
+`}</style>
+      <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 className="text-4xl md:text-5xl font-bold text-red-500 mb-4">Preise</h2>
-        <p className="text-neutral-300 text-lg md:text-xl mb-12 sm:mb-16">Professionelle Leistungen für dein Musikprojekt</p>
-        <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
-          {pricingData.map(card => <PricingCard key={card.service} price={card.price} service={card.service} details={card.details} setSelectedService={setSelectedService} handleSetSelectedServiceAndScroll={handleSetSelectedServiceAndScroll} />)}
+        <p className="text-neutral-300 text-lg md:text-xl mb-12 sm:mb-16 drop-shadow">Professionelle Leistungen für dein Musikprojekt</p>
+        <div className="grid md:grid-cols-3 gap-6 sm:gap-8 preise-tablet-grid">
+          {pricingData.map(card => (
+            <div className="preise-tablet-card">
+              <PricingCard key={card.service} price={card.price} service={card.service} details={card.details} setSelectedService={setSelectedService} handleSetSelectedServiceAndScroll={handleSetSelectedServiceAndScroll} />
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -771,7 +838,7 @@ const TeamMemberCard = ({ imageSrc, name, role, bio }) => {
         className={`relative w-full h-full transition-transform duration-700 ease-in-out preserve-3d ${isFlipped ? 'rotate-y-180' : ''}`}
       >
         {/* Front Face */}
-        <div className="absolute top-0 left-0 w-full h-full bg-neutral-800 rounded-2xl shadow-[0_0_20px_-8px_rgba(239,68,68,0.4)] border border-transparent group-hover:shadow-[0_0_30px_-5px_rgba(239,68,68,0.7)] group-hover:scale-[1.03] group-hover:border-red-500/30 backface-hidden overflow-hidden flex flex-col"> {/* Adjusted */}
+        <div className="absolute top-0 left-0 w-full h-full bg-neutral-800 rounded-2xl shadow-[0_0_20px_-8px_rgba(239,68,68,0.4)] border border-transparent group-hover:shadow-[0_0_30px_-5px_rgba(239,68,68,0.7)] active:shadow-[0_0_30px_-5px_rgba(239,68,68,0.7)] group-hover:border-red-500/30 active:border-red-500/30 sm:group-hover:scale-[1.03] backface-hidden overflow-hidden flex flex-col"> {/* Adjusted */}
           <img src={imageSrc} alt={name} className="w-full h-80 object-cover" />
           <div className="p-5 bg-neutral-800 flex-grow flex flex-col justify-center"> {/* Adjusted */}
             <div>
@@ -834,17 +901,35 @@ const TeamSection = () => {
 
   return (
     <section id="team" className="min-h-screen bg-transparent text-white flex flex-col justify-center items-center pt-16 sm:pt-20 pb-20 sm:pb-28 scroll-mt-16 sm:scroll-mt-20">
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center"> {/* Changed max-w-5xl to max-w-7xl */}
+      <style>{`
+  @media (min-width: 640px) and (max-width: 1023px) {
+    .team-tablet-grid {
+      grid-template-columns: 1fr !important;
+      gap: 2rem !important;
+      max-width: 480px !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+    .team-tablet-card {
+      min-width: 0 !important;
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+  }
+`}</style>
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 className="text-4xl md:text-5xl font-bold text-white mb-12 sm:mb-16">Unser Team</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-10 w-full max-w-3xl lg:max-w-7xl mx-auto team-tablet-grid">
           {teamMembers.map(member => (
-            <TeamMemberCard
-              key={member.name}
-              name={member.name}
-              role={member.role}
-              imageSrc={member.imageSrc}
-              bio={member.bio} // Pass bio
-            />
+            <div className="team-tablet-card">
+              <TeamMemberCard
+                key={member.name}
+                name={member.name}
+                role={member.role}
+                imageSrc={member.imageSrc}
+                bio={member.bio}
+              />
+            </div>
           ))}
         </div>
       </div>
@@ -991,9 +1076,28 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
   return (
     <footer className="text-neutral-400 py-8 text-center relative" style={{ background: '#000' }}>
+      <style>{`
+    @media (min-width: 640px) and (max-width: 1023px) {
+      .footer-tablet-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 1.5rem !important;
+      }
+      .footer-tablet-socials {
+        justify-content: center !important;
+        margin-bottom: 0.5rem !important;
+      }
+      .footer-tablet-legal {
+        text-align: center !important;
+        width: 100% !important;
+        margin-bottom: 0.5rem !important;
+      }
+    }
+  `}</style>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <div className="flex flex-col items-center sm:grid sm:[grid-template-columns:1fr_auto_1fr] sm:items-center w-full">
-          <div className="flex items-center justify-center space-x-2 mx-auto mb-2 block sm:hidden">
+        <div className="flex flex-col items-center sm:grid sm:[grid-template-columns:1fr_auto_1fr] sm:items-center w-full footer-tablet-grid">
+          <div className="flex items-center justify-center space-x-2 mx-auto mb-2 block sm:hidden footer-tablet-socials">
             <a href="https://www.instagram.com/raw.lm/" target="_blank" rel="noopener noreferrer" aria-label="rawlm Instagram">
               <img src="/rawlm.webp" alt="rawlm Logo" className="h-8 w-auto drop-shadow-lg rounded-lg bg-white/10 p-1" style={{ boxShadow: '0 0 12px 2px #fff2' }} />
             </a>
@@ -1014,8 +1118,8 @@ const Footer = () => {
               </svg>
             </a>
           </div>
-          <p className="text-sm w-full text-center sm:col-start-2 sm:text-center sm:whitespace-nowrap">&copy; {currentYear} mamicstudios. All rights reserved. <span className="mx-2">|</span><a href="#impressum" className="underline hover:text-red-400 transition-colors">Impressum</a> <span className="mx-2">|</span><a href="#datenschutz" className="underline hover:text-red-400 transition-colors">Datenschutz</a></p>
-          <div className="hidden sm:col-start-3 sm:justify-self-end sm:flex sm:items-center sm:space-x-5">
+          <p className="text-sm w-full text-center sm:col-start-2 sm:text-center sm:whitespace-nowrap footer-tablet-legal">&copy; {currentYear} mamicstudios. All rights reserved. <span className="mx-2">|</span><a href="#impressum" className="underline hover:text-red-400 transition-colors">Impressum</a> <span className="mx-2">|</span><a href="#datenschutz" className="underline hover:text-red-400 transition-colors">Datenschutz</a></p>
+          <div className="hidden sm:col-start-3 sm:justify-self-end sm:flex sm:items-center sm:space-x-5 footer-tablet-socials">
             <a href="https://instagram.com/mamicstudios" target="_blank" rel="noopener noreferrer" className="h-10 w-10 flex items-center justify-center rounded-lg bg-white/10 p-1.5 drop-shadow-lg" aria-label="Instagram" style={{ boxShadow: '0 0 14px 2px #fff2' }}>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-7 h-7">
                 <rect x="2" y="2" width="20" height="20" rx="6" fill="none" stroke="currentColor" strokeWidth="2" />
