@@ -578,79 +578,78 @@ const ReferenzenSection = () => {
                         ))}
                       </div>
                     )}
-                    <div className="absolute inset-0 flex flex-col justify-center items-center bg-black/60 z-10" style={{ pointerEvents: 'auto' }}>
-                      <div className="flex flex-col items-center justify-center w-full" style={{ marginTop: isDelivered ? '60px' : '40px', pointerEvents: 'none' }}>
-                        <audio
-                          ref={el => audioRefs.current[index] = el}
-                          src={isDelivered ? deliveredSongs[selectedDeliveredSongIndex].file : item.audio}
-                          onEnded={() => {
-                            if (playingIndex === index) {
-                              setPlayingIndex(null);
-                              setProgress(0);
-                              // Optionally: Reset currentTime to 0 to allow replay from start
-                              if(audioRefs.current[index]) audioRefs.current[index].currentTime = 0;
-                            }
-                          }}
-                          onLoadedMetadata={() => {
-                            // Update progress and duration when metadata is loaded
-                            if (audioRefs.current[index]) {
-                              // Initialize volume when metadata loads
-                              audioRefs.current[index].volume = volumes[index] !== undefined ? volumes[index] : 0.7;
-                            }
-                          }}
+                    {/* Overlay immer pointer-events:none, Button außerhalb! */}
+                    <div className="absolute inset-0 bg-black/60 z-10" style={{ pointerEvents: 'none' }} />
+                    <div className="absolute left-1/2 top-1/2 z-20 flex flex-col items-center justify-center w-full" style={{ transform: 'translate(-50%,-50%)', pointerEvents: 'none' }}>
+                      <audio
+                        ref={el => audioRefs.current[index] = el}
+                        src={isDelivered ? deliveredSongs[selectedDeliveredSongIndex].file : item.audio}
+                        onEnded={() => {
+                          if (playingIndex === index) {
+                            setPlayingIndex(null);
+                            setProgress(0);
+                            if(audioRefs.current[index]) audioRefs.current[index].currentTime = 0;
+                          }
+                        }}
+                        onLoadedMetadata={() => {
+                          if (audioRefs.current[index]) {
+                            audioRefs.current[index].volume = volumes[index] !== undefined ? volumes[index] : 0.7;
+                          }
+                        }}
+                      />
+                    </div>
+                    {/* Play/Pause-Button außerhalb des pointer-events:none Bereichs! */}
+                    <button
+                      onClick={() => playingIndex === index ? handlePause(index) : handlePlay(index)}
+                      className="absolute left-1/2 top-1/2 mb-4 w-14 h-14 flex items-center justify-center rounded-full bg-white/90 shadow-lg transition-colors duration-200"
+                      style={{ pointerEvents: 'auto', zIndex: 9999, touchAction: 'manipulation', transform: 'translate(-50%,-50%)' }}
+                    >
+                      {playingIndex === index ? (
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 text-red-500">
+                          <rect x="6" y="5" width="4" height="14" rx="1.5" fill="currentColor" />
+                          <rect x="14" y="5" width="4" height="14" rx="1.5" fill="currentColor" />
+                        </svg>
+                      ) : (
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 text-red-500">
+                          <polygon points="7,5 21,12 7,19" fill="currentColor" />
+                        </svg>
+                      )}
+                    </button>
+                    {/* Restliche Player-UI (Timeline, Volume) bleibt wie gehabt, pointer-events:none, aber nicht interaktiv auf Mobile */}
+                    <div className="absolute left-1/2 z-20 flex flex-col items-center justify-center w-full" style={{ bottom: '12%', transform: 'translateX(-50%)', pointerEvents: 'none' }}>
+                      <div className="flex items-center w-full px-4 mb-2 mx-auto justify-center">
+                        <span className="text-xs text-neutral-200 w-12 text-center select-none">
+                          {audioRefs.current[index] ? formatTime(audioRefs.current[index].currentTime) : '0:00'}
+                        </span>
+                        <input
+                          type="range"
+                          min="0"
+                          max={audioRefs.current[index]?.duration || 0}
+                          value={audioRefs.current[index]?.currentTime || 0}
+                          onChange={(e) => handleTimelineChange(e, index)}
+                          className="w-full h-1.5 bg-neutral-600 rounded-lg appearance-none cursor-pointer mx-2 accent-red-500"
+                          disabled={!(audioRefs.current[index]?.duration > 0)}
                         />
-                        <button
-                          onClick={() => playingIndex === index ? handlePause(index) : handlePlay(index)}
-                          className="mb-4 w-14 h-14 flex items-center justify-center rounded-full bg-white/90 shadow-lg transition-colors duration-200"
-                          style={{ pointerEvents: 'auto', zIndex: 9999, touchAction: 'manipulation' }}
-                        >
-                          {playingIndex === index ? (
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 text-red-500">
-                              <rect x="6" y="5" width="4" height="14" rx="1.5" fill="currentColor" />
-                              <rect x="14" y="5" width="4" height="14" rx="1.5" fill="currentColor" />
-                            </svg>
-                          ) : (
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 text-red-500">
-                              <polygon points="7,5 21,12 7,19" fill="currentColor" />
-                            </svg>
-                          )}
-                        </button>
-                        <div className="flex items-center w-full px-4 mb-2 mx-auto justify-center">
-                          <span className="text-xs text-neutral-200 w-12 text-center select-none">
-                            {/* Zeige immer den aktuellen Fortschritt, nicht nur wenn playingIndex === index */}
-                            {audioRefs.current[index] ? formatTime(audioRefs.current[index].currentTime) : '0:00'}
-                          </span>
-                          <input
-                            type="range"
-                            min="0"
-                            max={audioRefs.current[index]?.duration || 0}
-                            value={audioRefs.current[index]?.currentTime || 0}
-                            onChange={(e) => handleTimelineChange(e, index)}
-                            className="w-full h-1.5 bg-neutral-600 rounded-lg appearance-none cursor-pointer mx-2 accent-red-500"
-                            disabled={!(audioRefs.current[index]?.duration > 0)}
-                          />
-                          <span className="text-xs text-neutral-200 w-12 text-center select-none">
-                            {audioRefs.current[index]?.duration ? formatTime(audioRefs.current[index].duration) : '0:00'}
-                          </span>
-                        </div>
-                        {/* Volume Slider: exakt wie Timeline aufgebaut */}
-                        <div className="flex items-center w-full px-4 mt-2 mx-auto justify-center hidden sm:flex">
-                          <span className="w-12 flex justify-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 text-neutral-300">
-                              <path strokeLinecap="round" strokeLinejoin="round" d="M19.114 5.636a9 9 0 0 1 0 12.728M16.463 8.288a5.25 5.25 0 0 1 0 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z" />
-                            </svg>
-                          </span>
-                          <input
-                            type="range"
-                            min="0"
-                            max="1"
-                            step="0.01"
-                            value={volumes[index] !== undefined ? volumes[index] : 0.7}
-                            onChange={(e) => handleVolumeChange(e, index)}
-                            className="w-full h-1.5 bg-neutral-600 rounded-lg appearance-none cursor-pointer mx-2 accent-red-500"
-                          />
-                          <span className="w-12" />
-                        </div>
+                        <span className="text-xs text-neutral-200 w-12 text-center select-none">
+                          {audioRefs.current[index]?.duration ? formatTime(audioRefs.current[index].duration) : '0:00'}
+                        </span>
+                      </div>
+                      <div className="flex items-center w-full px-4 mt-2 mx-auto justify-center hidden sm:flex">
+                        <span className="w-12 flex justify-center">
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 text-neutral-300">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M19.114 5.636a9 9 0 0 1 0 12.728M16.463 8.288a5.25 5.25 0 0 1 0 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z" />
+                          </svg>
+                        </span>
+                        <input
+                          type="range"
+                          min="0"
+                          max="1"
+                          step="0.01"
+                          value={volumes[index] !== undefined ? volumes[index] : 0.7}
+                          onChange={(e) => handleVolumeChange(e, index)}
+                          className="w-full h-1.5 bg-neutral-600 rounded-lg appearance-none cursor-pointer mx-2 accent-red-500"
+                        />
+                        <span className="w-12" />
                       </div>
                     </div>
                   </>
