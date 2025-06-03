@@ -616,7 +616,7 @@ const ReferenzenSection = () => {
                       )}
                     </button>
                     {/* Restliche Player-UI (Timeline, Volume) bleibt wie gehabt, pointer-events:none, aber nicht interaktiv auf Mobile */}
-                    <div className="absolute left-1/2 z-20 flex flex-col items-center justify-center w-full" style={{ bottom: '12%', transform: 'translateX(-50%)', pointerEvents: 'none' }}>
+                    <div className="absolute left-1/2 z-20 flex flex-col items-center justify-center w-full" style={{ bottom: '12%', transform: 'translateX(-50%)' }}>
                       <div className="flex items-center w-full px-4 mb-2 mx-auto justify-center">
                         <span className="text-xs text-neutral-200 w-12 text-center select-none">
                           {audioRefs.current[index] ? formatTime(audioRefs.current[index].currentTime) : '0:00'}
@@ -1249,9 +1249,8 @@ const Footer = () => {
             </a>
             <a href="https://instagram.com/mamicstudios" target="_blank" rel="noopener noreferrer" className="h-8 w-8 flex items-center justify-center rounded-lg bg-white/10 p-1 drop-shadow-lg" aria-label="Instagram" style={{ boxShadow: '0 0 12px 2px #fff2' }}>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-7 h-7">
-                <rect x="2" y="2" width="20" height="20" rx="6" fill="none" stroke="currentColor" strokeWidth="2" />
-                <circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" strokeWidth="2" />
-                <circle cx="17" cy="7" r="1.2" fill="currentColor" />
+                <rect x="6" y="5" width="4" height="14" rx="1.5" fill="currentColor" />
+                <rect x="14" y="5" width="4" height="14" rx="1.5" fill="currentColor" />
               </svg>
             </a>
             <a href="https://www.youtube.com/@martinmamic" target="_blank" rel="noopener noreferrer" className="h-8 w-8 flex items-center justify-center rounded-lg bg-white/10 p-1 drop-shadow-lg" aria-label="YouTube" style={{ boxShadow: '0 0 12px 2px #fff2' }}>
