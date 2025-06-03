@@ -600,7 +600,7 @@ const ReferenzenSection = () => {
                     </div>
                     {/* Play/Pause-Button außerhalb des pointer-events:none Bereichs! */}
                     <button
-                      onClick={() => playingIndex === index ? handlePause(index) : handlePlay(index)}
+                      onPointerDown={() => playingIndex === index ? handlePause(index) : handlePlay(index)}
                       className="absolute left-1/2 top-1/2 mb-4 w-14 h-14 flex items-center justify-center rounded-full bg-white/90 shadow-lg transition-colors duration-200"
                       style={{ pointerEvents: 'auto', zIndex: 9999, touchAction: 'manipulation', transform: 'translate(-50%,-50%)' }}
                     >
