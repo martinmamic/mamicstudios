@@ -12,7 +12,6 @@ export default function SimpleContactForm() {
       className="max-w-md mx-auto bg-neutral-900 p-8 rounded-xl shadow-lg space-y-6"
       action="https://formsubmit.io/send/mamicstudios@gmail.com"
       method="POST"
-      onSubmit={() => setSubmitted(true)}
     >
       {/* Honeypot field for spam protection */}
       <input type="text" name="_honey" style={{ display: "none" }} tabIndex="-1" autoComplete="off" />
