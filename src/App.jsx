@@ -578,8 +578,8 @@ const ReferenzenSection = () => {
                         ))}
                       </div>
                     )}
-                    <div className="absolute inset-0 flex flex-col justify-center items-center bg-black/60 z-10" style={{ pointerEvents: 'none' }}>
-                      <div className="flex flex-col items-center justify-center w-full" style={{ marginTop: isDelivered ? '60px' : '40px' }}>
+                    <div className="absolute inset-0 flex flex-col justify-center items-center bg-black/60 z-10" style={{ pointerEvents: 'auto' }}>
+                      <div className="flex flex-col items-center justify-center w-full" style={{ marginTop: isDelivered ? '60px' : '40px', pointerEvents: 'none' }}>
                         <audio
                           ref={el => audioRefs.current[index] = el}
                           src={isDelivered ? deliveredSongs[selectedDeliveredSongIndex].file : item.audio}
@@ -602,7 +602,7 @@ const ReferenzenSection = () => {
                         <button
                           onClick={() => playingIndex === index ? handlePause(index) : handlePlay(index)}
                           className="mb-4 w-14 h-14 flex items-center justify-center rounded-full bg-white/90 shadow-lg transition-colors duration-200"
-                          style={{ pointerEvents: 'auto', zIndex: 30 }}
+                          style={{ pointerEvents: 'auto', zIndex: 9999, touchAction: 'manipulation' }}
                         >
                           {playingIndex === index ? (
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 text-red-500">
