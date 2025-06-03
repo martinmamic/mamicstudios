@@ -4,7 +4,7 @@ const DatenschutzSection = () => (
 
 <section
   id="datenschutz"
-  className="relative min-h-screen text-white flex flex-col justify-center items-center py-20 sm:py-28 px-4 sm:px-6 lg:px-8 w-full box-border"
+  className="relative min-h-screen text-white flex flex-col justify-center items-center w-full box-border"
   style={{
     background: '#18181b',
     paddingTop: 'calc(env(safe-area-inset-top, 0px) + 0rem)',
@@ -12,7 +12,7 @@ const DatenschutzSection = () => (
   }}
 >
   <div
-    className="relative z-10 w-full max-w-md md:max-w-2xl lg:max-w-3xl mx-auto text-left bg-black/50 rounded-2xl p-8 sm:p-12 shadow-2xl backdrop-blur-md border border-white/10 overflow-hidden break-words box-border"
+    className="relative z-10 w-full max-w-md md:max-w-2xl lg:max-w-3xl mx-auto text-left bg-black/50 rounded-2xl p-8 sm:p-12 px-4 sm:px-6 lg:px-8 shadow-2xl backdrop-blur-md border border-white/10 overflow-hidden break-words box-border"
   >
     <h2 className="text-3xl sm:text-4xl font-bold text-red-500 mb-8 text-center">Datenschutzerklärung</h2>
     <div className="space-y-6 text-neutral-300 text-base sm:text-base md:text-lg">
