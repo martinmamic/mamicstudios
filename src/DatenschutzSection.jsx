@@ -13,7 +13,7 @@ const DatenschutzSection = () => (
     className="relative z-10 w-full max-w-md md:max-w-2xl lg:max-w-3xl mx-auto text-left bg-black/50 rounded-2xl p-8 sm:p-12 shadow-2xl backdrop-blur-md border border-white/10 overflow-hidden break-words box-border"
   >
     <h2 className="text-3xl sm:text-4xl font-bold text-red-500 mb-8 text-center">Datenschutzerklärung</h2>
-    <div className="space-y-6 text-neutral-300 text-base sm:text-base md:text-lg">
+    <div className="space-y-6 text-neutral-300">
       <h3 className="text-xl font-semibold text-neutral-100 mb-2">1. Allgemeine Hinweise</h3>
       <p>Der Schutz deiner persönlichen Daten ist mir ein besonderes Anliegen. Ich behandle deine personenbezogenen Daten vertraulich und entsprechend der gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung.</p>
       <h3 className="text-xl font-semibold text-neutral-100 mb-2">2. Verantwortlicher</h3>
