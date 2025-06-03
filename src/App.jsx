@@ -868,10 +868,7 @@ const KontaktSection = ({ selectedService, setSelectedService, videoFade }) => {
     }
   }, [selectedService]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log({ name, email, subject: serviceSelection ? `Anfrage für: ${serviceSelection}` : subject, message, service: serviceSelection });
-  };
+
 
   return (
     <section
@@ -891,7 +888,13 @@ const KontaktSection = ({ selectedService, setSelectedService, videoFade }) => {
       <div className="relative z-30 w-full max-w-md sm:max-w-2xl mx-auto text-center px-0">
         <h2 className="text-4xl md:text-5xl font-bold text-red-500 mb-4 drop-shadow-lg">Kontakt</h2>
         <p className="text-neutral-300 text-lg md:text-xl mb-10 sm:mb-12 drop-shadow">Schreib mir eine Nachricht!</p>
-        <form onSubmit={handleSubmit} className="space-y-6 text-left bg-black/50 rounded-2xl p-6 sm:p-8 shadow-2xl backdrop-blur-md border border-white/10 w-full box-border" style={{maxWidth:'100%'}}>
+        <form className="space-y-6 text-left bg-black/50 rounded-2xl p-6 sm:p-8 shadow-2xl backdrop-blur-md border border-white/10 w-full box-border" style={{maxWidth:'100%'}} action="https://formsubmit.co/mamicstudios@gmail.com" method="POST">
+          {/* Honeypot field for spam protection */}
+          <input type="text" name="_honey" style={{ display: "none" }} tabIndex="-1" autoComplete="off" />
+          {/* Disable captcha by Formsubmit */}
+          <input type="hidden" name="_captcha" value="false" />
+          {/* Redirect to thank you message (optional) */}
+          <input type="hidden" name="_next" value="https://mamicstudios.de/danke.html" />
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-neutral-300 mb-1">Name</label>
             <input type="text" name="name" id="name" value={name} onChange={(e) => setName(e.target.value)} className="bg-neutral-800 border-neutral-700 text-neutral-100 text-sm rounded-lg focus:ring-1 focus:ring-red-500 focus:border-red-500 focus:outline-none block w-full p-3 placeholder-neutral-500" placeholder="Dein Name" required /> {/* Added focus:outline-none */}
