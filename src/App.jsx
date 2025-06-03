@@ -1,7 +1,6 @@
 // MamicStudios Webseite – Komplettstruktur mit Video-Background, Navigation, Equipment, Preise, Referenzen und Team
 import React, { useState, useEffect, useRef } from "react";
 import { BookOpenIcon, BriefcaseIcon, ChatBubbleOvalLeftEllipsisIcon, AdjustmentsHorizontalIcon, ChevronRightIcon, ChevronLeftIcon, XMarkIcon } from '@heroicons/react/24/solid'; // Added ChevronLeftIcon and XMarkIcon
-import DatenschutzSection from "./DatenschutzSection";
 
 const Navigation = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -1214,50 +1213,6 @@ const KontaktSection = ({ selectedService, setSelectedService, videoFade }) => {
   );
 };
 
-const ImpressumSection = () => {
-  return (
-    <section id="impressum" className="relative min-h-screen text-white flex flex-col justify-center items-center py-20 sm:py-28 px-4 sm:px-6 lg:px-8" style={{ background: '#18181b' }}>
-      <div className="relative z-10 w-full max-w-md md:max-w-2xl lg:max-w-3xl mx-auto text-left bg-black/50 rounded-2xl p-8 sm:p-12 shadow-2xl backdrop-blur-md border border-white/10">
-        <h2 className="text-3xl sm:text-4xl font-bold text-red-500 mb-8 text-center">Impressum</h2>
-        <div className="space-y-6 text-neutral-300">
-          <div className="border-b border-neutral-700 pb-4">
-            <h3 className="text-xl font-semibold text-neutral-100 mb-2">Angaben gemäß § 5 TMG</h3>
-            <p>Martin Mamic</p>
-            <p>mamicstudios – Einzelunternehmen</p>
-            <p>Am Pfarrtor 23</p>
-            <p>71272 Renningen</p>
-            <p>Deutschland</p>
-          </div>
-          <div className="border-b border-neutral-700 pb-4">
-            <h3 className="text-xl font-semibold text-neutral-100 mb-2">Kontakt</h3>
-            <p>Telefon: 0157 35527731</p>
-            <p>E-Mail: <a href="mailto:mamicstudios@gmail.com" className="text-red-500 hover:text-red-400">mamicstudios@gmail.com</a></p>
-          </div>
-          <div className="border-b border-neutral-700 pb-4">
-            <h3 className="text-xl font-semibold text-neutral-100 mb-2">Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h3>
-            <p>Martin Mamic</p>
-            <p>Am Pfarrtor 23</p>
-            <p>71272 Renningen</p>
-          </div>
-          <div className="border-b border-neutral-700 pb-4">
-            <h3 className="text-xl font-semibold text-neutral-100 mb-2">Hinweis gemäß § 19 UStG</h3>
-            <p>Als Kleinunternehmer wird keine Umsatzsteuer erhoben und ausgewiesen.</p>
-          </div>
-          <div className="pb-4">
-            <h3 className="text-xl font-semibold text-neutral-100 mb-2">Plattform der EU-Kommission zur Online-Streitbeilegung</h3>
-            <p>
-              <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener noreferrer" className="text-red-500 hover:text-red-400">
-                https://ec.europa.eu/consumers/odr
-              </a>
-            </p>
-            <p>Ich bin weder verpflichtet noch bereit, an einem Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
-
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   return (
@@ -1293,39 +1248,39 @@ const Footer = () => {
             <a href="https://instagram.com/mamicstudios" target="_blank" rel="noopener noreferrer" className="h-8 w-8 flex items-center justify-center rounded-lg bg-white/10 p-1 drop-shadow-lg" aria-label="Instagram" style={{ boxShadow: '0 0 12px 2px #fff2' }}>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-7 h-7">
                 <rect x="6" y="5" width="4" height="14" rx="1.5" fill="currentColor" />
-                <rect x="14" y="5" width="4" height="14" rx="1.5" fill="currentColor" />
-              </svg>
-            </a>
-            <a href="https://www.youtube.com/@martinmamic" target="_blank" rel="noopener noreferrer" className="h-8 w-8 flex items-center justify-center rounded-lg bg-white/10 p-1 drop-shadow-lg" aria-label="YouTube" style={{ boxShadow: '0 0 12px 2px #fff2' }}>
-              <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7" xmlns="http://www.w3.org/2000/svg">
-                <rect x="2" y="2" width="20" height="20" rx="6" fill="none" stroke="currentColor" strokeWidth="2" />
-                <polygon points="10,8.5 17,12 10,15.5" fill="currentColor" />
-              </svg>
-            </a>
-          </div>
-          <p className="text-sm w-full text-center sm:col-start-2 sm:text-center sm:whitespace-nowrap footer-tablet-legal">&copy; {currentYear} mamicstudios. All rights reserved. <span className="mx-2">|</span><a href="#impressum" className="underline hover:text-red-400 transition-colors">Impressum</a> <span className="mx-2">|</span><a href="#datenschutz" className="underline hover:text-red-400 transition-colors">Datenschutz</a></p>
-          <div className="hidden sm:col-start-3 sm:justify-self-end sm:flex sm:items-center sm:space-x-5 footer-tablet-socials">
-            <a href="https://instagram.com/mamicstudios" target="_blank" rel="noopener noreferrer" className="h-10 w-10 flex items-center justify-center rounded-lg bg-white/10 p-1.5 drop-shadow-lg" aria-label="Instagram" style={{ boxShadow: '0 0 14px 2px #fff2' }}>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-7 h-7">
-                <rect x="2" y="2" width="20" height="20" rx="6" fill="none" stroke="currentColor" strokeWidth="2" />
-                <circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" strokeWidth="2" />
-                <circle cx="17" cy="7" r="1.2" fill="currentColor" />
-              </svg>
-            </a>
-            <a href="https://www.youtube.com/@martinmamic" target="_blank" rel="noopener noreferrer" className="h-10 w-10 flex items-center justify-center rounded-lg bg-white/10 p-1.5 drop-shadow-lg" aria-label="YouTube" style={{ boxShadow: '0 0 14px 2px #fff2' }}>
-              <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7" xmlns="http://www.w3.org/2000/svg">
-                <rect x="2" y="2" width="20" height="20" rx="6" fill="none" stroke="currentColor" strokeWidth="2" />
-                <polygon points="10,8.5 17,12 10,15.5" fill="currentColor" />
-              </svg>
-            </a>
-            <a href="https://www.instagram.com/raw.lm/" target="_blank" rel="noopener noreferrer" aria-label="rawlm Instagram">
-              <img src="/rawlm.PNG" alt="rawlm Logo" className="h-10 w-auto drop-shadow-lg rounded-lg bg-white/10 p-1.5" style={{ boxShadow: '0 0 14px 2px #fff2' }} />
-            </a>
-            <a href="https://www.instagram.com/buchfuehrungsserviceek/" target="_blank" rel="noopener noreferrer">
-              <img src="/AEK.png" alt="AEK Logo" className="h-10 w-auto drop-shadow-lg rounded-lg bg-white/10 p-1.5" style={{ boxShadow: '0 0 14px 2px #fff2' }} />
-            </a>
-          </div>
-        </div>
+                          <rect x="14" y="5" width="4" height="14" rx="1.5" fill="currentColor" />
+                        </svg>
+                        </a>
+                        <a href="https://www.youtube.com/@martinmamic" target="_blank" rel="noopener noreferrer" className="h-8 w-8 flex items-center justify-center rounded-lg bg-white/10 p-1 drop-shadow-lg" aria-label="YouTube" style={{ boxShadow: '0 0 12px 2px #fff2' }}>
+                          <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="2" y="2" width="20" height="20" rx="6" fill="none" stroke="currentColor" strokeWidth="2" />
+                            <polygon points="10,8.5 17,12 10,15.5" fill="currentColor" />
+                          </svg>
+                        </a>
+                      </div>
+                      <p className="text-sm w-full text-center sm:col-start-2 sm:text-center sm:whitespace-nowrap footer-tablet-legal">&copy; {currentYear} mamicstudios. All rights reserved. <span className="mx-2">|</span><a href="/impressum" className="underline hover:text-red-400 transition-colors">Impressum</a> <span className="mx-2">|</span><a href="/datenschutz" className="underline hover:text-red-400 transition-colors">Datenschutz</a></p>
+                      <div className="hidden sm:col-start-3 sm:justify-self-end sm:flex sm:items-center sm:space-x-5 footer-tablet-socials">
+                        <a href="https://instagram.com/mamicstudios" target="_blank" rel="noopener noreferrer" className="h-10 w-10 flex items-center justify-center rounded-lg bg-white/10 p-1.5 drop-shadow-lg" aria-label="Instagram" style={{ boxShadow: '0 0 14px 2px #fff2' }}>
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-7 h-7">
+                            <rect x="2" y="2" width="20" height="20" rx="6" fill="none" stroke="currentColor" strokeWidth="2" />
+                            <circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" strokeWidth="2" />
+                            <circle cx="17" cy="7" r="1.2" fill="currentColor" />
+                          </svg>
+                        </a>
+                        <a href="https://www.youtube.com/@martinmamic" target="_blank" rel="noopener noreferrer" className="h-10 w-10 flex items-center justify-center rounded-lg bg-white/10 p-1.5 drop-shadow-lg" aria-label="YouTube" style={{ boxShadow: '0 0 14px 2px #fff2' }}>
+                          <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="2" y="2" width="20" height="20" rx="6" fill="none" stroke="currentColor" strokeWidth="2" />
+                            <polygon points="10,8.5 17,12 10,15.5" fill="currentColor" />
+                          </svg>
+                        </a>
+                        <a href="https://www.instagram.com/raw.lm/" target="_blank" rel="noopener noreferrer" aria-label="rawlm Instagram">
+                          <img src="/rawlm.PNG" alt="rawlm Logo" className="h-10 w-auto drop-shadow-lg rounded-lg bg-white/10 p-1.5" style={{ boxShadow: '0 0 14px 2px #fff2' }} />
+                        </a>
+                        <a href="https://www.instagram.com/buchfuehrungsserviceek/" target="_blank" rel="noopener noreferrer">
+                          <img src="/AEK.png" alt="AEK Logo" className="h-10 w-auto drop-shadow-lg rounded-lg bg-white/10 p-1.5" style={{ boxShadow: '0 0 14px 2px #fff2' }} />
+                        </a>
+                      </div>
+                    </div>
       </div>
     </footer>
   );
@@ -1432,10 +1387,6 @@ function App() {
           {/* videoFade wird als Prop übergeben */}
           <KontaktSection selectedService={selectedService} setSelectedService={setSelectedService} videoFade={videoFade} />
         </div>
-        <ImpressumSection />
-        <section id="datenschutz" className="text-white py-12 px-4" style={{ background: '#18181b' }}>
-          <DatenschutzSection />
-        </section>
         <Footer />
       </div>
     </>

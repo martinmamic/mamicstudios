@@ -20,11 +20,30 @@
       text-align: center;
     }
     .message h1 {
-      color: #f43f5e;
+      color: #dc2626 !important;
       margin-bottom: 1rem;
+      letter-spacing: -0.01em;
     }
     .message p {
       color: #cccccc;
+    }
+    .back-button {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.75rem 2rem;
+      background-color: #dc2626;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s;
+      cursor: pointer;
+      letter-spacing: -0.01em;
+    }
+    .back-button:hover {
+      background-color: #be123c;
     }
   </style>
 </head>
@@ -32,6 +51,7 @@
   <div class="message">
     <h1>Vielen Dank!</h1>
     <p>Deine Nachricht wurde erfolgreich gesendet. <br />Wir melden uns schnellstmöglich bei dir.</p>
+    <a href="/" class="back-button">Zurück zur Webseite</a>
   </div>
 </body>
 </html>

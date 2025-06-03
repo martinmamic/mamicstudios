@@ -1,5 +1,7 @@
 import React from "react";
 
+// HINWEIS: Diese Komponente wird nicht mehr verwendet. Datenschutz ist jetzt eine eigene Seite unter /datenschutz.
+
 const DatenschutzSection = () => (
 
 <section id="datenschutz" className="relative min-h-screen text-white flex flex-col justify-center items-center py-20 sm:py-28 px-0" style={{ background: '#18181b' }}>
