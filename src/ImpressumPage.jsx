@@ -6,7 +6,7 @@ export default function ImpressumPage() {
       <h2 className="text-2xl sm:text-4xl font-bold text-red-500 mb-8 text-center break-words hyphens-auto">
         Impressum
       </h2>
-      <div className="space-y-6 text-neutral-300 text-sm md:text-base w-full max-w-md md:max-w-2xl lg:max-w-3xl mx-auto text-left">
+      <div className="space-y-6 text-neutral-300 text-sm md:text-base w-full max-w-md md:max-w-2xl lg:max-w-3xl mx-auto text-left px-4 sm:px-0">
         <h3 className="text-xl font-semibold text-neutral-100 mb-2">Angaben gemäß § 5 TMG</h3>
         <p>Martin Mamic<br />
 mamicstudios – Einzelunternehmen<br />
