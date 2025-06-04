@@ -1068,7 +1068,7 @@ const TeamSection = () => {
       name: "Martin Mamic",
       role: "Chief Executive Officer",
       imageSrc: "/martin.webp",
-      bio: "Ich bin der Gründer von mamicstudios und ein leidenschaftlicher Audio Engineer & Beatmaker. Seit über 5 Jahren produziere ich Beats – mit rund 2 Jahren Erfahrung im Recording, Mixing und Mastering. Mein Ziel ist es, künstlerische Visionen mit technischem Feingefühl und kreativem Sounddesign auf höchstem Niveau umzusetzen. Dabei leite ich MamicStudios sowohl kreativ als auch strategisch."
+      bio: "Ich bin der Gründer von mamicstudios und ein leidenschaftlicher Audio Engineer & Beatmaker. Seit über 5 Jahren produziere ich Beats – mit rund 2 Jahren Erfahrung im Recording, Mixing und Mastering. Mein Ziel ist es, künstlerische Visionen mit technischem Feingefühl und kreativem Sounddesign auf höchstem Niveau umzusetzen. Dabei leite ich mamicstudios sowohl kreativ als auch strategisch."
     },
     {
       name: "Letizia Krüger",
@@ -1259,7 +1259,19 @@ const Footer = () => {
             </svg>
           </a>
         </div>
-        <p className="text-sm w-full text-center footer-tablet-legal">&copy; {currentYear} mamicstudios. All rights reserved. <span className="mx-2">|</span><a href="/impressum" className="underline hover:text-red-400 transition-colors">Impressum</a> <span className="mx-2">|</span><a href="/datenschutz" className="underline hover:text-red-400 transition-colors">Datenschutz</a></p>
+        {/* Mobile: Impressum und Datenschutz nebeneinander */}
+        <p className="text-sm w-full text-center footer-tablet-legal mb-1">&copy; {currentYear} mamicstudios. All rights reserved.</p>
+        <div className="flex justify-center items-center space-x-2 sm:hidden text-sm">
+          <a href="/impressum" className="underline hover:text-red-400 transition-colors">Impressum</a>
+          <span className="mx-1">|</span>
+          <a href="/datenschutz" className="underline hover:text-red-400 transition-colors">Datenschutz</a>
+        </div>
+        {/* Tablet/Desktop: Impressum und Datenschutz wie gehabt */}
+        <p className="text-sm w-full text-center footer-tablet-legal hidden sm:block">
+          <a href="/impressum" className="underline hover:text-red-400 transition-colors">Impressum</a>
+          <span className="mx-2">|</span>
+          <a href="/datenschutz" className="underline hover:text-red-400 transition-colors">Datenschutz</a>
+        </p>
       </div>
     </footer>
   );
